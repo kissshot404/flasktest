@@ -1,18 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename= 'css/css.css') }}">
-</head>
-<body>
-<img src="{{ url_for('static',filename='img/default.jpg') }}" alt="">
-<p>这里是首页</p>
-{% if name  %}
-<p>解析数据：name={{name}}</p>
-{% endif %}
+{% extends 'base.html' %}
 
-<script src="{{ url_for('static',filename='js/js.js') }}"></script>
+{% block main %}
+<div style="display: block;width: 1000px;margin: 0 auto">
 
-</body>
-</html>
+<div class="row" style="margin: 50px">
+    <div class="col-xs-6 col-md-3">
+        <a href="{{ url_for('static',filename='img/default.jpg') }}" class="thumbnail">
+            <img src="{{ url_for('static',filename='img/default.jpg') }}" alt="...">
+        </a>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <a href="{{ url_for('static',filename='img/default.jpg') }}" class="thumbnail">
+            <img src="{{ url_for('static',filename='img/default.jpg') }}" alt="...">
+        </a>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <a href="{{ url_for('static',filename='img/default.jpg') }}" class="thumbnail">
+            <img src="{{ url_for('static',filename='img/default.jpg') }}" alt="...">
+        </a>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <a href="{{ url_for('static',filename='img/default.jpg') }}" class="thumbnail">
+            <img src="{{ url_for('static',filename='img/default.jpg') }}" alt="...">
+        </a>
+    </div>
+</div>
+
+
+
+    <div class="list-group" style="width: 300px">
+        {% for t in tests %}
+            {% if t.id == 1 %}
+            <a href="/{{t.id}}" class="list-group-item active">
+                {{ t.name }}
+            </a>
+            {% else %}
+            <a href="/{{t.id}}"  class="list-group-item">
+                {{ t.name }}
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+</div>
+
+
+{% endblock %}
