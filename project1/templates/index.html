@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename= 'css/css.css') }}">
 </head>
 <body>
-
+<img src="{{ url_for('static',filename='img/default.jpg') }}" alt="">
 <p>这里是首页</p>
 {% if name  %}
 <p>解析数据：name={{name}}</p>
 {% endif %}
+
+<script src="{{ url_for('static',filename='js/js.js') }}"></script>
 
 </body>
 </html>
