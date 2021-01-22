@@ -1,14 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return 'Hello World!'
+	name = 'kiss'
+	return render_template('index.html',**locals())
 
-@app.route('/<int:pk>/')
-def detail(pk):
-	return f'Hello World!{pk}'
 
 
 if __name__ == '__main__':
