@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 
 app = Flask(__name__)
 
@@ -52,6 +52,7 @@ def default(pk):
 # 登陆路由
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	error = None
 	if request.method == 'GET':
 		return render_template('login.html', **locals())
 	elif request.method == 'POST':
@@ -61,6 +62,8 @@ def login():
 			if u['email'] == email and u['password'] == password:
 				session['user'] = u['name']
 				return redirect(url_for("index"))
+			else:
+				flash('邮箱或密码错误')
 		return redirect(url_for("login"))
 
 
@@ -82,7 +85,7 @@ def regist():
 		if password == password1:
 			for i in USER:
 				if i['email'] == email:
-					print('1')
+					flash('邮箱重复')
 					return redirect(url_for('regist'))
 			USER.append({
 				'name': name,
@@ -91,10 +94,8 @@ def regist():
 			})
 			session['user'] = name
 			return redirect(url_for('index'))
-		print('2')
-
+		flash('密码不一致')
 		return redirect(url_for('regist'))
-
 
 
 if __name__ == '__main__':
